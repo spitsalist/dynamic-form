@@ -3,10 +3,12 @@ import { useForm } from 'react-hook-form';
 import styles from './DynamicForm.module.css';
 
 const DynamicForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm({
+        mode: 'onChange' 
+    });
     const onSubmit = data => {
         const jsonData = JSON.stringify(data, null, 2);  
-        console.log(data); 
+        console.log('Data submitted:', jsonData); 
         alert('Welcome Back'); 
     };
 
@@ -71,7 +73,7 @@ const DynamicForm = () => {
                     </>
                 )}
 
-                <button type="submit">Submit</button>
+                <button type="submit" disabled={!isValid}>Submit</button>
             </form>
         </div>
     );
